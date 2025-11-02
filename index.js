@@ -159,7 +159,8 @@ Return ONLY valid JSON (no comments, no markdown) that matches this exact TypeSc
 Important:
 - Keep it concise and practical.
 - Each day's lists must have 3–4 items.
-- "resources" must include at least one youtube video link of topic, one article of the topic which explains what the topic is, and one pdf link; all of them MUST BE BEST REAL LINKS, not any example.com websites. MAKE SURE WHATEVER YOU PROVIDE IS RELATED TO THE TOPIC ONLY, NOTHING OUTSIDE OF IT.
+- "resources" must include at least one youtube playlist link of that topic, one article/blog of the topic (INTRO BLOG / ARTICLE) which explains what the topic is about, and one pdf/book link. 
+- MAKE SURE WHATEVER YOU PROVIDE IS RELATED TO THE TOPIC ONLY, NOTHING OUTSIDE OF IT.
 - Do not include any text outside the JSON.
 `;
 
