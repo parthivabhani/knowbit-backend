@@ -29,6 +29,7 @@ const dummyCourse = {
       goals: ["Understand the basics", "Set up environment", "First exercise"],
       concepts: ["Core terminology", "Why it matters", "Basic principles"],
       exercises: ["Install tools", "Terminology quiz", "Hello world task"],
+      notes: "This day covers the foundational knowledge you need to get started. You will learn basic concepts and how to set up the environment to begin hands-on exercises."
     },
     {
       day: 2,
@@ -36,6 +37,7 @@ const dummyCourse = {
       goals: ["Master essentials", "Practice techniques", "Build confidence"],
       concepts: ["Key tools", "Best practices", "Common patterns"],
       exercises: ["Guided tasks", "CLI practice", "Mini project"],
+      notes: "Day two focuses on mastering fundamental techniques. You'll practice using the main tools and follow guided exercises to reinforce your understanding."
     },
     {
       day: 3,
@@ -43,6 +45,7 @@ const dummyCourse = {
       goals: ["Explore advanced features", "Connect concepts", "Apply skills"],
       concepts: ["Advanced methods", "Integration", "Optimization"],
       exercises: ["Problem set", "Integration task", "Perf tuning"],
+      notes: "This day dives into intermediate topics, connecting previous concepts and exploring more advanced features. You'll apply these skills in practical exercises."
     },
     {
       day: 4,
@@ -50,6 +53,7 @@ const dummyCourse = {
       goals: ["Build a full project", "Test & validate", "Debug issues"],
       concepts: ["Project planning", "Testing", "Debugging"],
       exercises: ["Build project", "Write tests", "Fix bugs"],
+      notes: "Day four emphasizes practical application. You'll build a full project, test it, and debug issues while consolidating your learning."
     },
     {
       day: 5,
@@ -57,6 +61,7 @@ const dummyCourse = {
       goals: ["Solidify knowledge", "Explore advanced topics", "Roadmap"],
       concepts: ["Advanced architectures", "Industry practices", "Trends"],
       exercises: ["Capstone", "Peer review", "Learning plan"],
+      notes: "The final day helps you solidify your knowledge, explore advanced topics, and plan next steps for continued learning."
     },
   ],
   resources: [
@@ -100,6 +105,7 @@ const normalizeCourse = (data, topic) => {
     goals: Array.isArray(d.goals) ? d.goals.map(String) : [],
     concepts: Array.isArray(d.concepts) ? d.concepts.map(String) : [],
     exercises: Array.isArray(d.exercises) ? d.exercises.map(String) : [],
+    notes: String(safe(d.notes, "")),
   }));
 
   const resources = Array.isArray(data.resources) ? data.resources : [];
@@ -133,8 +139,11 @@ const generateCourseFromGemini = async (topic) => {
   const prompt = `
 You are an expert instructional designer. Create a structured, personalized 5-day mini-course for the topic: "${topic}".
 
-Return ONLY valid JSON (no comments, no markdown) that matches this exact TypeScript shape:
+For each day, include:
+- "day", "title", "goals", "concepts", "exercises" (3–4 items each)
+- "notes": 1–2 paragraphs explaining the day's topic in detail, readable and educational.
 
+Return ONLY valid JSON with this structure:
 {
   "title": string,
   "duration": string,
@@ -146,7 +155,8 @@ Return ONLY valid JSON (no comments, no markdown) that matches this exact TypeSc
     "title": string,
     "goals": string[],
     "concepts": string[],
-    "exercises": string[]
+    "exercises": string[],
+    "notes": string
   }>,
   "resources": Array<{
     "title": string,
@@ -155,13 +165,8 @@ Return ONLY valid JSON (no comments, no markdown) that matches this exact TypeSc
     "description": string
   }>
 }
-
-Important:
-- Keep it concise and practical.
-- Each day's lists must have 3–4 items.
-- "resources" must include at least one youtube playlist link of that topic, one article/blog of the topic (INTRO BLOG / ARTICLE) which explains what the topic is about, and one pdf/book link. 
-- MAKE SURE WHATEVER YOU PROVIDE IS RELATED TO THE TOPIC ONLY, NOTHING OUTSIDE OF IT.
-- Do not include any text outside the JSON.
+Make sure notes are meaningful, detailed, and relevant to the topic of that day.
+Do not include any text outside the JSON.
 `;
 
   const result = await model.generateContent(prompt);
