@@ -166,7 +166,7 @@ Return ONLY valid JSON with this structure:
   }>
 }
 Important:
-- "resources" must include at least one youtube search link of that topic, one article/blog of the topic (INTRO BLOG / ARTICLE) which explains what the topic is about, and one pdf/book link. 
+- "resources" must include at least one youtube search link of that topic, Google search link for intro article/blog which explains what the topic is about, and Google Books / PDF search link. 
 -  MAKE SURE WHATEVER YOU PROVIDE IS RELATED TO THE TOPIC ONLY, NOTHING OUTSIDE OF IT.
 -  Make sure notes are meaningful, detailed, and relevant to the topic of that day.
 Do not include any text outside the JSON.
