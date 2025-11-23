@@ -134,7 +134,7 @@ const normalizeCourse = (data, topic) => {
 
 // --- Generate course using Gemini
 const generateCourseFromGemini = async (topic) => {
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
   const prompt = `
 You are an expert instructional designer. Create a structured, personalized 5-day mini-course for the topic: "${topic}".
